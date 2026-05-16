@@ -201,26 +201,31 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Navbar Overlay */}
       <header className="backdrop-blur-md absolute top-0 left-0 right-0 z-50 w-full bg-transparent">
-        <div className="container mx-auto px-4 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <a href="#" className="text-xl font-bold text-white md:text-black hover:text-accent transition-colors drop-shadow-md md:drop-shadow-none">בית</a>            <a href="#contact" className="text-xl font-bold text-white md:text-black hover:text-accent transition-colors drop-shadow-md md:drop-shadow-none">צור קשר</a>
-            <a href="#rooms" className="text-xl font-bold text-white md:text-black hover:text-accent transition-colors drop-shadow-md md:drop-shadow-none">החדרים שלנו</a>
-            <a href="#gallery" className="text-xl font-bold text-white md:text-black hover:text-accent transition-colors drop-shadow-md md:drop-shadow-none">גלריה</a>
+        <div className="container mx-auto px-6 h-24 flex items-center justify-between">
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#" className="text-xl font-bold text-black hover:text-accent transition-colors">בית</a>
+            <a href="#contact" className="text-xl font-bold text-black hover:text-accent transition-colors">צור קשר</a>
+            <a href="#rooms" className="text-xl font-bold text-black hover:text-accent transition-colors">החדרים שלנו</a>
+            <a href="#gallery" className="text-xl font-bold text-black hover:text-accent transition-colors">גלריה</a>
+          </nav>
+          
+          {/* Mobile Nav Trigger (Simple) */}
+          <div className="md:hidden flex items-center gap-4">
+             <a href="tel:0554309961" className="bg-black text-white px-4 py-2 rounded-full text-sm font-bold">הזמן עכשיו</a>
           </div>
 
           <div className="flex items-center mt-1">
-            <Image src="/logo-img.png" alt="Tan Tan Logo" width={140} height={50} className="object-contain" />
+            <Image src="/logo-img.png" alt="Tan Tan Logo" width={100} height={40} className="object-contain md:w-[140px] md:h-[50px]" />
           </div>
         </div>
       </header>
 
+
       <main className="flex-1">
         {/* Hero Section with 3D Carousel */}
         <section className="relative h-screen w-full overflow-hidden bg-white flex flex-col items-center justify-center pt-24">
-
-
-          <div className="relative z-10 w-full px-4 md:px-10 lg:px-25 h-[80vh]">
-            <div className="relative h-full w-full overflow-hidden rounded-[3rem] shadow-2xl flex items-center justify-center">
+          <div className="relative z-10 w-full px-4 md:px-10 lg:px-24 h-[60vh] md:h-[80vh]">
+            <div className="relative h-full w-full overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl flex items-center justify-center">
               <Image
                 src="/rooms/image_31099_7bd8f5f59eab45619a4bd68814578aad.jpg"
                 alt="Hero Background"
@@ -228,40 +233,41 @@ export default function Home() {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-black/30"></div>
-
-              <div className="relative z-20 max-w-5xl text-center px-4">
+              <div className="absolute inset-0 bg-black/40"></div>
+              
+              <div className="relative z-20 max-w-5xl text-center px-6">
                 <h1 className="ml11 text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                   <span className="text-wrapper block relative">
-                    <span className="line line1 absolute left-0 bottom-0 h-[2px] w-full bg-white origin-left"></span>
-                    <span className="letters text-white block py-2 text-8xl font-varela">חופשה ירושלמית עם נוף עוצר נשימה</span>
+                    <span className="line line1 absolute left-0 bottom-0 h-[1px] md:h-[2px] w-full bg-white origin-left"></span>
+                    <span className="letters text-white block py-2 text-4xl md:text-6xl lg:text-8xl font-varela leading-tight">חופשה ירושלמית עם נוף עוצר נשימה</span>
                   </span>
                 </h1>
               </div>
             </div>
-
           </div>
-
         </section>
 
+
+
         {/* Reviews Section */}
-        <section id="reviews" className="py-24 bg-white">
-          <div className="container mx-auto px-1">
-            <div className="text-center mb-20">
+        <section id="reviews" className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16 md:mb-20">
               <div className="flex items-center justify-center gap-2 mb-6">
                 <Image src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" width={80} height={30} className="object-contain" />
-                <span className="text-2xl font-bold font-varela text-neutral-400">Reviews</span>
+                <span className="text-xl md:text-2xl font-bold font-varela text-neutral-400">Reviews</span>
               </div>
-              <h2 className="text-6xl mb-6 font-suez">מה האורחים שלנו אומרים</h2>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-suez leading-tight">מה האורחים שלנו אומרים</h2>
               <div className="flex justify-center gap-1 mb-10">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-8 h-8 fill-yellow-400 text-yellow-400" />
+                  <Star key={i} className="w-6 h-6 md:w-8 md:h-8 fill-yellow-400 text-yellow-400" />
                 ))}
-                <span className="mr-4 text-2xl font-bold font-varela">4.9/5</span>
+                <span className="mr-4 text-xl md:text-2xl font-bold font-varela">4.9/5</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 mx-auto">
+
               {[
                 {
                   name: "Kfir 059",
@@ -324,14 +330,15 @@ export default function Home() {
 
 
         {/* Gallery */}
-        <section id="gallery" className="py-32 border-t-2 border-neutral-200">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-24">
-              <h2 className="text-7xl mb-6 font-suez">גלריה</h2>
-              <p className="text-3xl text-neutral-500 max-w-2xl mx-auto font-varela">רגעים של קסם בסוויטת טן טן</p>
+        <section id="gallery" className="py-20 md:py-32 border-t border-neutral-100">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16 md:mb-24">
+              <h2 className="text-5xl md:text-7xl mb-6 font-suez">גלריה</h2>
+              <p className="text-xl md:text-3xl text-neutral-500 max-w-2xl mx-auto font-varela">רגעים של קסם בסוויטת טן טן</p>
             </div>
 
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-10 space-y-10">
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 md:gap-10 space-y-6 md:space-y-10">
+
               {galleryImages.map((src, index) => (
                 <div key={index} className="break-inside-avoid group relative overflow-hidden rounded-[8px] shadow-xs hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] transition-all duration-700">
                   <Image
@@ -350,25 +357,25 @@ export default function Home() {
         </section>
 
         {/* Policies */}
-        <section className="py-32 bg-white" id="rooms">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-              <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-3xl">
+        <section className="py-20 md:py-32 bg-white" id="rooms">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <div className="relative aspect-[16/10] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
                 <Image src="/rooms/image_31099_2988ac388dcd403c87f3128ff109d508.jpg" alt="Policy Image" fill className="object-cover" />
               </div>
-              <div className="space-y-10">
-                <h2 className="text-6xl font-varela">החופשה השקטה שלכם</h2>
-                <div className="space-y-8">
-                  <div className="flex gap-6 items-start">
+              <div className="space-y-8 md:space-y-10">
+                <h2 className="text-4xl md:text-6xl font-varela leading-tight text-center lg:text-right">החופשה השקטה שלכם</h2>
+                <div className="space-y-6 md:space-y-8">
+                  <div className="flex gap-4 md:gap-6 items-start">
                     <div>
-                      <h4 className="text-3xl font-varela mb-2">פרטיות מוחלטת</h4>
-                      <p className="text-xl text-neutral-500 font-varela">הסוויטה ממוקמת באזור שקט ומבודד, מבטיחה לכם פרטיות מלאה לאורך כל השהות.</p>
+                      <h4 className="text-2xl md:text-3xl font-varela mb-2">פרטיות מוחלטת</h4>
+                      <p className="text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">הסוויטה ממוקמת באזור שקט ומבודד, מבטיחה לכם פרטיות מלאה לאורך כל השהות.</p>
                     </div>
                   </div>
-                  <div className="flex gap-6 items-start">
+                  <div className="flex gap-4 md:gap-6 items-start">
                     <div>
-                      <h4 className="text-3xl font-varela mb-2">ניקיון ללא פשרות</h4>
-                      <p className="text-xl text-neutral-500 font-varela">אנחנו מקפידים על סטנדרטים גבוהים ביותר של היגיינה וניקיון עבור כל אורח.</p>
+                      <h4 className="text-2xl md:text-3xl font-varela mb-2">ניקיון ללא פשרות</h4>
+                      <p className="text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">אנחנו מקפידים על סטנדרטים גבוהים ביותר של היגיינה וניקיון עבור כל אורח.</p>
                     </div>
                   </div>
                 </div>
@@ -376,6 +383,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
         <section id="contact" className="py-12 md:py-16 px-4">
           <div className="max-w-4xl mx-auto">
             {/* Contact Section */}
