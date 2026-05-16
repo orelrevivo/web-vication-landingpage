@@ -208,10 +208,10 @@ export default function Home() {
             <a href="#rooms" className="text-xl font-bold text-black hover:text-accent transition-colors">החדרים שלנו</a>
             <a href="#gallery" className="text-xl font-bold text-black hover:text-accent transition-colors">גלריה</a>
           </nav>
-          
+
           {/* Mobile Nav Trigger (Simple) */}
           <div className="md:hidden flex items-center gap-4">
-             <a href="tel:0554309961" className="bg-black text-white px-4 py-2 rounded-full text-sm font-bold">הזמן עכשיו</a>
+            <a href="tel:0554309961" className="bg-black text-white px-4 py-2 rounded-full text-sm font-bold">הזמן עכשיו</a>
           </div>
 
           <div className="flex items-center mt-1">
@@ -234,7 +234,7 @@ export default function Home() {
                 priority
               />
               <div className="absolute inset-0 bg-black/40"></div>
-              
+
               <div className="relative z-20 max-w-5xl text-center px-6">
                 <h1 className="ml11 text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                   <span className="text-wrapper block relative">
@@ -479,14 +479,38 @@ export default function Home() {
                 </a>
               </div>
             </section>
+
+            {/* Google Maps Section */}
+            <div className="mt-8 relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg border border-neutral-200">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3391.8042152!2d35.1233886!3d31.8042152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502d12bae8c4d55%3A0xb9bd13f5e6a0e62e!2z16TXpteZ157XqCDXqdecINeq158t16rXnw!5e0!3m2!1siw!2sil!4v1715878482431!5m2!1siw!2sil" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale-[0.2] contrast-[1.1]"
+              ></iframe>
+              <a 
+                href="https://www.google.com/maps/place/%D7%94%D7%A6%D7%99%D7%9E%D7%A8+%D7%A9%D7%9C+%D7%AA%D7%9F-%D7%AA%D7%9F%E2%80%AD/@31.8042152,35.1233886,16.25z/data=!4m6!3m5!1s0x1502d12bae8c4d55:0xb9bd13f5e6a0e62e!8m2!3d31.807!4d35.123644!16s%2Fg%2F11g737h1y6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-sm font-bold shadow-md flex items-center gap-2 hover:bg-white transition-colors"
+              >
+                <MapPin size={14} className="text-accent" />
+                פתח ב-Google Maps
+              </a>
+            </div>
           </div>
         </section>
+
       </main>
 
       <footer className="py-24 bg-white border-t border-neutral-100">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
-            <Image src="/logo-main.png" alt="Tan Tan Logo" width={220} height={80} className="mb-14 object-contain" />
+            <Image src="/logo-img.png" alt="Tan Tan Logo" width={220} height={80} className="mb-14 object-contain" />
             <div className="flex gap-12 mb-14 text-2xl font-bold font-varela text-neutral-400">
               <a href="#" className="hover:text-black transition-colors">בית</a>
               <a href="#rooms" className="hover:text-black transition-colors">חדרים</a>
