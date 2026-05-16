@@ -1,0 +1,161 @@
+.carousel-viewport {
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  width: 100%;
+  height: 600px;
+  position: relative;
+  user-select: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.carousel-cylinder {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 400px;
+  margin: -200px 0 0 -150px;
+  border-radius: 20px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 50px 100px rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  transition: filter 0.4s ease;
+}
+
+
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.carousel-item:hover img {
+  transform: scale(1.1);
+}
+
+.carousel-item .item-label {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  color: white;
+  font-family: var(--font-varela);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s, transform 0.4s;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item:hover .item-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ambient blob from the user code */
+.ambient-carousel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 600px;
+  background: radial-gradient(ellipse,
+      rgba(var(--accent-rgb), 0.15) 0%,
+      transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ml11 {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a1a1a;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+
+.ml11 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml11 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 3px;
+  background-color: #fff;
+  transform-origin: 0 50%;
+}
+
+.ml11 .line1 {
+  top: 0;
+  left: 0;
+}
+
+.ml11 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+/* Shape Dividers */
+.shape-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+}
+
+.shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+
+.shape-divider .shape-fill {
+  /* removed fill here to use inline SVG fill */
+}
+
+.shape-divider-top {
+  top: -1px;
+}
+
+.shape-divider-bottom {
+  bottom: -1px;
+  transform: rotate(180deg);
+}
+
+.gallery-section {
+  position: relative;
+  background-color: #f5f5f5; /* Subtle neutral for contrast */
+}
