@@ -197,7 +197,7 @@ export default function Home() {
                       <span className="line line1 absolute left-0 bottom-0 h-[1px] md:h-[2px] w-full bg-white origin-left" />
                       <span className="letters text-white block py-2 text-4xl md:text-6xl lg:text-8xl font-varela leading-tight">
                         חופשה ירושלמית עם
-                        <br />נוף עוצר נשימה
+                        נוף עוצר נשימה
                       </span>
                     </span>
                   </h1>
