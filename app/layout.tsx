@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Suez_One } from "next/font/google";
-import localFont from "next/font/local";
+import { Suez_One, Varela_Round } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const varelaRound = localFont({
-  src: "../public/fonts/VarelaRound-Regular.ttf",
+const varelaRound = Varela_Round({
+  subsets: ["hebrew", "latin"],
   variable: "--font-varela-round",
+  weight: "400",
 });
 
 const suezOne = Suez_One({
@@ -16,8 +16,11 @@ const suezOne = Suez_One({
 });
 
 export const metadata: Metadata = {
-  title: "סוויטת טן טן - נופש יוקרתי בבית נקופה",
-  description: "חוויית אירוח בלתי נשכחת עם הנוף היפה ביותר באזור ירושלים. סוויטת טן טן בבית נקופה.",
+  title: "תן תן",
+  description: "חוויית אירוח בלתי נשכחת עם הנוף היפה ביותר באזור ירושלים. סוויטת תן תן בבית נקופה.",
+  icons: {
+    icon: "/icon.png?v=2",
+  },
 };
 
 export default function RootLayout({

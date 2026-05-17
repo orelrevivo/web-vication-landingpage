@@ -55,18 +55,9 @@ export default function Home() {
   React.useEffect(() => {
     // ─── ml11 text animation ───────────────────────────────────────────────
     gsap.set(".ml11", {
-      fontSize: "clamp(1.5rem, 5vw, 3.5rem)",
       fontWeight: 700,
       fontFamily: "var(--font-varela)",
     });
-
-    const textWrapper = document.querySelector(".ml11 .letters");
-    if (textWrapper && textWrapper.textContent) {
-      textWrapper.innerHTML = textWrapper.textContent.replace(
-        /([^\x00-\x80]|\w)/g,
-        "<span class='letter' style='display:inline-block; line-height:1em;'>$&</span>"
-      );
-    }
 
     const ml11Timeline = gsap.timeline();
 
@@ -195,9 +186,16 @@ export default function Home() {
                   <h1 className="ml11 text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                     <span className="text-wrapper block relative">
                       <span className="line line1 absolute left-0 bottom-0 h-[1px] md:h-[2px] w-full bg-white origin-left" />
-                      <span className="letters text-white block py-2 text-4xl md:text-6xl lg:text-8xl font-varela leading-tight">
-                        חופשה ירושלמית עם
-                        נוף עוצר נשימה
+                      <span className="letters text-white flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] py-2 font-varela leading-tight">
+                        {"חופשה ירושלמית עם נוף עוצר נשימה".split(" ").map((word, wordIndex) => (
+                          <span key={wordIndex} className="word inline-block whitespace-nowrap">
+                            {word.split("").map((char, charIndex) => (
+                              <span key={charIndex} className="letter inline-block">
+                                {char}
+                              </span>
+                            ))}
+                          </span>
+                        ))}
                       </span>
                     </span>
                   </h1>
@@ -233,7 +231,7 @@ export default function Home() {
                 />
                 <span className="text-xl md:text-2xl font-bold font-varela text-neutral-400">Reviews</span>
               </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6 font-suez leading-tight">מה האורחים שלנו אומרים</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-6 font-suez leading-tight">מה האורחים שלנו אומרים</h2>
               <div className="flex justify-center gap-1 mb-10">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-6 h-6 md:w-8 md:h-8 fill-yellow-400 text-yellow-400" />
@@ -269,7 +267,7 @@ export default function Home() {
                   avatar: "https://lh3.googleusercontent.com/a/ACg8ocJl1qFvgD28BFfWZfZJUMooELz4QgFPVt2xAn5fI9XWTrOqb74=w72-h72-p-rp-mo-ba3-br100",
                 },
               ].map((review, i) => (
-                <Card key={i} className="border-none shadow-xs rounded-[8px] p-10 bg-neutral-50 hover:bg-white">
+                <Card key={i} className="border-none shadow-xs rounded-[8px] p-6 md:p-10 bg-neutral-50 hover:bg-white">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-16 h-16 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center text-2xl font-bold text-neutral-500 shrink-0">
                       {review.avatar ? (
@@ -294,7 +292,7 @@ export default function Home() {
             </div>
 
             <div className="mt-16 text-center">
-              <Button variant="outline" className="rounded-full px-10 py-6 text-xl font-bold border-2 hover:bg-neutral-100" asChild>
+              <Button variant="outline" className="rounded-full px-6 py-4 text-lg md:px-10 md:py-6 md:text-xl font-bold border-2 hover:bg-neutral-100" asChild>
                 <a
                   href="https://www.google.com/maps/place/%D7%94%D7%A6%D7%99%D7%9E%D7%A8+%D7%A9%D7%9C+%D7%AA%D7%9F-%D7%AA%D7%9F%E2%80%AD/@31.8042152,35.1233886,16.25z"
                   target="_blank"
@@ -315,8 +313,8 @@ export default function Home() {
         <section id="gallery" className="py-20 md:py-32 border-t border-neutral-100" style={{ position: "relative", zIndex: 2, background: "#fff" }}>
           <div className="container mx-auto px-6">
             <div className="text-center mb-16 md:mb-24">
-              <h2 className="text-5xl md:text-7xl mb-6 font-suez">גלריה</h2>
-              <p className="text-xl md:text-3xl text-neutral-500 max-w-2xl mx-auto font-varela">רגעים של קסם בסוויטת טן טן</p>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-6 font-suez">גלריה</h2>
+              <p className="text-base sm:text-lg md:text-2xl lg:text-3xl text-neutral-500 max-w-2xl mx-auto font-varela">רגעים של קסם בסוויטת טן טן</p>
             </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 md:gap-10 space-y-6 md:space-y-10">
               {galleryImages.map((src, index) => (
@@ -343,18 +341,18 @@ export default function Home() {
                 <Image src="/rooms/image_31099_2988ac388dcd403c87f3128ff109d508.jpg" alt="Policy Image" fill className="object-cover" />
               </div>
               <div className="space-y-8 md:space-y-10">
-                <h2 className="text-4xl md:text-6xl font-varela leading-tight text-center lg:text-right">החופשה השקטה שלכם</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-varela leading-tight text-center lg:text-right">החופשה השקטה שלכם</h2>
                 <div className="space-y-6 md:space-y-8">
                   <div className="flex gap-4 md:gap-6 items-start">
                     <div>
-                      <h4 className="text-2xl md:text-3xl font-varela mb-2">פרטיות מוחלטת</h4>
-                      <p className="text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">הסוויטה ממוקמת באזור שקט ומבודד, מבטיחה לכם פרטיות מלאה לאורך כל השהות.</p>
+                      <h4 className="text-xl sm:text-2xl md:text-3xl font-varela mb-2">פרטיות מוחלטת</h4>
+                      <p className="text-base sm:text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">הסוויטה ממוקמת באזור שקט ומבודד, מבטיחה לכם פרטיות מלאה לאורך כל השהות.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 md:gap-6 items-start">
                     <div>
-                      <h4 className="text-2xl md:text-3xl font-varela mb-2">ניקיון ללא פשרות</h4>
-                      <p className="text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">אנחנו מקפידים על סטנדרטים גבוהים ביותר של היגיינה וניקיון עבור כל אורח.</p>
+                      <h4 className="text-xl sm:text-2xl md:text-3xl font-varela mb-2">ניקיון ללא פשרות</h4>
+                      <p className="text-base sm:text-lg md:text-xl text-neutral-500 font-varela leading-relaxed">אנחנו מקפידים על סטנדרטים גבוהים ביותר של היגיינה וניקיון עבור כל אורח.</p>
                     </div>
                   </div>
                 </div>
@@ -365,7 +363,7 @@ export default function Home() {
 
         <section id="contact" className="py-12 md:py-16 px-4" style={{ position: "relative", zIndex: 2, background: "#fff" }}>
           <div className="max-w-4xl mx-auto">
-            <section style={{ fontFamily: "inherit", padding: "3rem 2.5rem", background: "#f5f5f5", borderRadius: "8px" }}>
+            <section className="py-10 px-6 sm:px-10 bg-neutral-50 rounded-lg">
               <style>{`
                 #contact .cs-grid {
                   display: grid;
@@ -418,11 +416,11 @@ export default function Home() {
                 }
               `}</style>
 
-              <p style={{ fontSize: 11, color: "#999", letterSpacing: "0.08em", textTransform: "uppercase", margin: "0 0 6px" }}>
+              <p className="text-[11px] text-neutral-400 tracking-[0.08em] uppercase mb-1.5">
                 צור קשר
               </p>
-              <h2 style={{ fontSize: 28, fontWeight: 500, color: "#111", margin: "0 0 4px" }}>מחכים לכם</h2>
-              <p style={{ fontSize: 14, color: "#888", margin: "0 0 2rem" }}>צרו קשר לתיאום החופשה הבאה שלכם</p>
+              <h2 className="text-2xl sm:text-3xl font-medium text-neutral-900 mb-1">מחכים לכם</h2>
+              <p className="text-sm sm:text-base text-neutral-500 mb-8">צרו קשר לתיאום החופשה הבאה שלכם</p>
 
               <div className="cs-grid">
                 <div className="cs-card">
@@ -441,9 +439,9 @@ export default function Home() {
 
               <hr style={{ border: "none", borderTop: "0.5px solid rgba(0,0,0,0.08)", margin: "2rem 0" }} />
 
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <span style={{ fontSize: 13, color: "#aaa" }}>זמינים לשאלות ותיאומים</span>
-                <a href="tel:0554309961" className="cs-btn">
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <span className="text-sm text-neutral-400">זמינים לשאלות ותיאומים</span>
+                <a href="tel:0554309961" className="cs-btn w-full sm:w-auto justify-center">
                   <Phone size={14} />
                   התקשרו להזמנה
                 </a>
@@ -475,17 +473,17 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="py-24 bg-white border-t border-neutral-100" style={{ position: "relative", zIndex: 2 }}>
+      <footer className="py-16 md:py-24 bg-white border-t border-neutral-100" style={{ position: "relative", zIndex: 2 }}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
-            <Image src="/logo-img.png" alt="Tan Tan Logo" width={220} height={80} className="mb-14 object-contain" />
-            <div className="flex gap-12 mb-14 text-2xl font-bold font-varela text-neutral-400">
+            <Image src="/logo-img.png" alt="Tan Tan Logo" width={180} height={65} className="mb-10 object-contain md:w-[220px] md:h-[80px]" />
+            <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-10 text-lg md:text-2xl font-bold font-varela text-neutral-400">
               <a href="#" className="hover:text-black transition-colors">בית</a>
               <a href="#rooms" className="hover:text-black transition-colors">חדרים</a>
               <a href="#gallery" className="hover:text-black transition-colors">גלריה</a>
               <a href="#contact" className="hover:text-black transition-colors">צור קשר</a>
             </div>
-            <p className="text-neutral-300 text-2xl font-medium font-varela">
+            <p className="text-neutral-400 text-sm md:text-lg font-medium font-varela text-center">
               © {new Date().getFullYear()} סוויטת טן טן. כל הזכויות שמורות.
             </p>
           </div>

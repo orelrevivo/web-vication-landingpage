@@ -90,7 +90,7 @@
 
 .ml11 {
   font-weight: 700;
-  font-size: 2rem;
+  font-size: clamp(1.1rem, 4.2vw, 5rem);
   color: #1a1a1a;
   letter-spacing: 0.05em;
   text-align: center;
