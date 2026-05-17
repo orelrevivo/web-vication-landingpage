@@ -51,73 +51,9 @@ export default function Home() {
     "/images/unnamed.jpg",
   ];
 
-  // 3D Carousel Logic
+  // Hero reveal & parallax scroll effect
   React.useEffect(() => {
-    if (!viewportRef.current || !cylinderRef.current) return;
-
-    const items = cylinderRef.current.querySelectorAll(".carousel-item");
-    const RADIUS = 595; // Calculated for 12 items with ~10px gap
-    const totalItems = items.length;
-    const angleStep = 360 / totalItems;
-
-    items.forEach((item, i) => {
-      const angle = i * angleStep;
-      (item as HTMLElement).style.transform = `rotateY(${angle}deg) translateZ(${RADIUS}px)`;
-    });
-
-    let cylinderRotation = 0;
-    let targetRotation = 0;
-    let scrollRotation = 0;
-    let dragRotation = 0;
-
-    const applyCylinder = () => {
-      if (cylinderRef.current) {
-        cylinderRef.current.style.transform = `rotateY(${cylinderRotation}deg)`;
-      }
-    };
-
-    const ticker = () => {
-      targetRotation = scrollRotation + dragRotation;
-      cylinderRotation += (targetRotation - cylinderRotation) * 0.08;
-      applyCylinder();
-    };
-
-    gsap.ticker.add(ticker);
-
-    const st = ScrollTrigger.create({
-      trigger: "body",
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: (self) => {
-        scrollRotation = self.progress * 360;
-      }
-    });
-
-    // Drag to rotate
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartRotation = 0;
-
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
-      dragStartX = e.clientX;
-      dragStartRotation = dragRotation;
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      dragRotation = dragStartRotation + (e.clientX - dragStartX) * 0.5;
-    };
-
-    const onMouseUp = () => {
-      isDragging = false;
-    };
-
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-
-    // hero title sizing - much smaller as requested
+    // hero title sizing
     gsap.set(".ml11", { fontSize: "clamp(1.5rem, 5vw, 3.5rem)", fontWeight: 700, fontFamily: "var(--font-varela)" });
 
     // ml11 Animation logic
@@ -157,43 +93,45 @@ export default function Home() {
         }, "-=0.7");
     };
 
-    const hideAnimation = () => {
-      gsap.to('.ml11', {
-        opacity: 0,
-        y: -50,
-        duration: 0.5,
-        ease: "power2.in"
-      });
-    };
-
-    const showAnimation = () => {
-      gsap.to('.ml11', {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: revealAnimation
-      });
-    };
-
     // Initial play
     revealAnimation();
 
-    // ScrollTrigger for the title behavior
+    // GSAP ScrollTrigger to pin and elegantly slide up the hero
+    const heroST = ScrollTrigger.create({
+      trigger: "#hero-section",
+      start: "top top",
+      end: "+=100%",
+      pin: true,
+      scrub: 1,
+      animation: gsap.timeline()
+        .to("#hero-container", {
+          yPercent: -100,
+          opacity: 0.9,
+          ease: "none"
+        }, 0)
+        .to("#hero-image-wrapper", {
+          yPercent: 15,
+          ease: "none"
+        }, 0)
+        .to("#hero-text-container", {
+          yPercent: -30,
+          opacity: 0,
+          ease: "none"
+        }, 0)
+    });
+
+    // Re-trigger the letter-by-letter reveal when user scrolls all the way back up
     const titleST = ScrollTrigger.create({
-      trigger: ".ml11",
-      start: "top 10%",
-      onLeave: () => hideAnimation(),
-      onEnterBack: () => showAnimation(),
+      trigger: "#hero-section",
+      start: "top top",
+      onEnterBack: () => {
+        revealAnimation();
+      }
     });
 
     return () => {
-      gsap.ticker.remove(ticker);
-      st.kill();
+      heroST.kill();
       titleST.kill();
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
     };
   }, []);
 
@@ -222,20 +160,22 @@ export default function Home() {
 
 
       <main className="flex-1">
-        {/* Hero Section with 3D Carousel */}
-        <section className="relative h-screen w-full overflow-hidden bg-white flex flex-col items-center justify-center pt-24">
-          <div className="relative z-10 w-full px-4 md:px-10 lg:px-24 h-[60vh] md:h-[80vh]">
-            <div className="relative h-full w-full overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl flex items-center justify-center">
-              <Image
-                src="/rooms/image_31099_7bd8f5f59eab45619a4bd68814578aad.jpg"
-                alt="Hero Background"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/40"></div>
-
-              <div className="relative z-20 max-w-5xl text-center px-6">
+        {/* Hero Section */}
+        <section id="hero-section" className="relative h-screen w-full overflow-hidden bg-white flex flex-col items-center justify-center pt-24">
+          <div id="hero-container" className="relative z-10 w-full px-4 md:px-10 lg:px-24 h-[60vh] md:h-[80vh]">
+            <div id="hero-card" className="relative h-full w-full overflow-hidden rounded-[2rem] md:rounded-[3rem] shadow-2xl flex items-center justify-center">
+              <div id="hero-image-wrapper" className="absolute inset-0 w-full h-full">
+                <Image
+                  src="/rooms/image_31099_7bd8f5f59eab45619a4bd68814578aad.jpg"
+                  alt="Hero Background"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/40 z-10"></div>
+              
+              <div id="hero-text-container" className="relative z-20 max-w-5xl text-center px-6">
                 <h1 className="ml11 text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                   <span className="text-wrapper block relative">
                     <span className="line line1 absolute left-0 bottom-0 h-[1px] md:h-[2px] w-full bg-white origin-left"></span>
